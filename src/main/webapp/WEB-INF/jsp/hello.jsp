@@ -13,6 +13,18 @@
 <a href="http://www.google.com" class="btn btn-primary">google</a>
 <hr>
 <img class="animated bounce" alt="xxx" src="http://www.placehold.it/100x100">
+<hr>
+<p>${deptVO}</p>
+<hr>
+<ul>
+	<li>${deptVO.deptno}</li>
+	<li>${deptVO.dname}</li>
+	<li>${deptVO.loc}</li>
+</ul>
+
+
+
+
 
 </body>
 </html>

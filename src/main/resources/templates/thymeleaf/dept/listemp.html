@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>listemp.html</title>
+<!--/*/ 
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
+<link rel="stylesheet" href="/webjars/animate.css/3.5.2/animate.css">
+/*/-->
+<link rel="stylesheet" href="../css/bootstrap.css" data-th-remove="all">
+<link rel="stylesheet" href="../css/animate.css" data-th-remove="all">
+</head>
+<body>
+<h1>Thymeleaf 부서 리스트 With Emp</h1>
+<div data-th-text="${depts}"></div>
+<div data-th-inline="text">[[${depts}]]</div>
+<hr>
+<div data-th-inline="text">
+	<ol>
+		<li>[[${depts[0].emps}]]</li>
+		<li>[[${depts[1]}]]</li>
+		<li>[[${depts[2]}]]</li>
+	</ol>
+</div>
+<hr>
+<ol>
+	<li data-th-each="dept : ${depts}">
+		<h2 data-th-text="${dept.deptno} + ',' + ${dept.dname}"></h2>
+		<table class="table table-striped animated fadeIn">
+			<tr data-th-each="emp : ${dept.emps}" data-th-inline="text">
+				<td>[[${emp.empno}]]</td>
+				<td>[[${emp.ename}]]</td>
+				<td>[[${emp.gender}]]</td>
+				<td>[[${emp.job}]]</td>
+				<td>[[${emp.mgr?.ename}]]</td>
+			</tr>
+		</table>		
+	</li>
+</ol>
+
+
+
+</body>
+</html>
