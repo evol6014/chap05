@@ -27,12 +27,46 @@
 	<li data-th-each="dept : ${depts}">
 		<h2 data-th-text="${dept.deptno} + ',' + ${dept.dname}"></h2>
 		<table class="table table-striped animated fadeIn">
+			<tr>
+					<th>empno</th>
+					<th>ename</th>
+					<th>gender1</th>
+					<th>gender2</th>
+					<th>job</th>
+					<th>mgr.name1</th>
+					<th>mgr.name2</th>
+					<th>hiredate1</th>
+					<th>hiredate2</th>
+					<th>sal1</th>
+					<th>sal2</th>
+			</tr>
 			<tr data-th-each="emp : ${dept.emps}" data-th-inline="text">
 				<td>[[${emp.empno}]]</td>
 				<td>[[${emp.ename}]]</td>
 				<td>[[${emp.gender}]]</td>
+				<th:block data-th-switch="${emp.gender.name()}">
+					<td data-th-case="'M'">남자</td>
+					<td data-th-case="'F'">여자</td>
+					<td data-th-case="*">3성</td>
+				</th:block>
+<!-- 				<th:block data-th-switch="${emp.gender}"> -->
+<!-- 					<td data-th-case="${emp.gender.M}">남자</td> -->
+<!-- 					<td data-th-case="${emp.gender.F}">여자</td> -->
+<!-- 				</th:block> -->
+				
 				<td>[[${emp.job}]]</td>
-				<td>[[${emp.mgr?.ename}]]</td>
+<!-- 				<td>[[${emp.mgr?.ename}]]</td> -->
+				<td>[[${emp.mgr == null ? 'xxx' : emp.mgr.ename}]]</td>
+				<td data-th-if="${emp.mgr eq null}">
+					<div class="btn btn-info animated bounceOutUp">없음xxx</div>
+				</td>
+				<td data-th-unless="${emp.mgr eq null}">
+					<div class="btn btn-primary animated fadeInLeft" >[[${emp.mgr.ename}]]</div>
+				</td>
+				<td>[[${emp.hiredate}]]</td>
+				<td th:text="${#dates.format(emp.hiredate, 'yyyy,MM,dd')}"></td>
+				<td>[[${emp.sal}]]</td>
+				<td th:text="${#numbers.formatInteger(emp.sal, 3,'COMMA')}"></td>
 			</tr>
 		</table>		
 	</li>
