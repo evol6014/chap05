@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.sitemesh.builder.SiteMeshFilterBuilder;
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,26 @@ import com.example.domain.DeptVO;
 @Configuration
 public class SitemeshConfig {
 
+	@Bean
+	FilterRegistrationBean<ConfigurableSiteMeshFilter> siteMeshFilter() {
+		FilterRegistrationBean<ConfigurableSiteMeshFilter> filter =
+				new FilterRegistrationBean<>();
+		
+		filter.setFilter(new ConfigurableSiteMeshFilter() {
+			@Override
+			protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
+//				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/default.jsp");
+				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/grid.jsp");
+				builder.addDecoratorPaths("/animate/*", "/WEB-INF/decorators/default.jsp");
+				
+			}
+		});
+		
+		filter.setUrlPatterns(Arrays.asList("/bootstrap/*", "/animate/*"));		
+		
+		return filter;
+	}
+	
 	@Bean
 	FilterRegistrationBean<Filter> testFilter() {
 		FilterRegistrationBean<Filter> filter = new FilterRegistrationBean<>();
