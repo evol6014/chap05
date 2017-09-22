@@ -34,11 +34,12 @@ public class SitemeshConfig {
 //				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/default.jsp");
 				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/grid.jsp");
 				builder.addDecoratorPaths("/animate/*", "/WEB-INF/decorators/default.jsp");
+				builder.addDecoratorPaths("/chart/*", "/WEB-INF/decorators/grid.jsp");
 				
 			}
 		});
 		
-		filter.setUrlPatterns(Arrays.asList("/bootstrap/*", "/animate/*"));		
+		filter.setUrlPatterns(Arrays.asList("/bootstrap/*", "/animate/*", "/chart/*"));		
 		
 		return filter;
 	}
