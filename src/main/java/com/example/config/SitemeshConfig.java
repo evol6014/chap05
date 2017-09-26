@@ -76,7 +76,7 @@ public class SitemeshConfig {
 				System.out.println("######################");
 			}
 		});
-		filter.setUrlPatterns(Arrays.asList("/dept/*", "/emp/*"));
+		filter.setUrlPatterns(Arrays.asList("/dept/*", "/emp/*"));	// url 매핑 / 지정한 주소에 있는거 호출할때는 이 필터를 거친다.
 		
 		return filter;
 	}

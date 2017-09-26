@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,7 +22,8 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
+
+@Entity	// JPA에서 엔티티를 관리하기 위해 준다. 테이블을 내가 만들어준다. 이걸로.
 @Table(name="tbl_emp")
 @Data
 @ToString(exclude={"mgr", "dept"})
@@ -34,10 +34,9 @@ public class EmpVO {
 	}
 	
 	@Id
-	@TableGenerator(name="idGen", table="id_gen", 
-					  pkColumnName="seq_name",
-					  valueColumnName="nextval",
-					  allocationSize=10, initialValue=7000)
+	@TableGenerator(name = "idGen", table = "id_gen", 
+					  pkColumnName = "seq_name", valueColumnName = "nextval", 
+					  allocationSize = 10, initialValue = 7000)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="idGen")
 	private Integer empno;
 	private String ename;
@@ -45,7 +44,8 @@ public class EmpVO {
 	private Gender gender;
 	private String job;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+//	private Integer mgr;
+	@OneToOne(fetch=FetchType.LAZY)		// mgr을 별도로 조회하기전에는 조회하지 않는다.(fetch=LAZY)
 	@JoinColumn(name="mgr")
 	private EmpVO mgr;
 	
@@ -53,12 +53,16 @@ public class EmpVO {
 	private Date hiredate;
 	private BigDecimal sal;
 	private BigDecimal comm;
+	
 //	private Integer deptno;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="deptno")
-	private DeptVO dept;
+	@ManyToOne(fetch=FetchType.LAZY)	// foreign key
+	@JoinColumn(name="deptno")	// 별도테이블을 만드는게 디폴트. 이거말고 조인컬럼을 만듦. 
+	private DeptVO dept;			// 이렇게 함으로 MyDept와 연관관계가 생긴다.
 	
 }
+
+
+
 
 
 

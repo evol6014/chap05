@@ -13,28 +13,40 @@
 </head>
 
 <body>
-<h1>Dept list !</h1>
-<h2 data-th-text="${'thymeleaf Dept list !'}"></h2>
-<p class="animated rotateIn" data-th-text="${depts}"></p>
+<h1>Emp list !</h1>
+<h2 data-th-text="${'thymeleaf Emp list !'}"></h2>
+<!-- <p class="animated rotateIn" data-th-text="${emps}"></p> -->
 <hr>
 <table class="table table-hover table-striped table-bordered animated zoomInUp">
 	<thead>
 		<tr>
-			<th>deptno</th><th>dname</th><th>loc</th>		
+			<th>empno</th>
+			<th>ename</th>
+			<th>gender</th>
+			<th>job</th>
+			<th>mgr</th>
+			<th>hiredate</th>
+			<th>sal</th>
+			<th>comm</th>		
 		</tr>
 	</thead>
 	<tfoot>
 	</tfoot>
 	<tbody>
-		<tr data-th-each="d : ${depts}">
-			<td data-th-text="${d.deptno}">deptno</td>
-			<td data-th-text="${d.dname}">dname</td>
-			<td data-th-text="${d.loc}">loc</td>
+		<tr data-th-each="e : ${emps}">
+			<td data-th-text="${e.empno}">empno</td>
+			<td data-th-text="${e.ename}">ename</td>
+			<td data-th-text="${e.gender}">gender</td>
+			<td data-th-text="${e.job}">job</td>
+			<td data-th-text="${e.mgr?.ename}">mgr</td>
+			<td data-th-text="${e.hiredate}">hiredate</td>
+			<td data-th-text="${e.sal}">sal</td>
+			<td data-th-text="${e.comm}">comm</td>
 		</tr>
 	</tbody>
 </table>
 <hr>
-<ul data-th-with="xxx=${depts}" class="list-group animated swing">
+<ul data-th-with="xxx=${emps}" class="list-group animated swing">
 	<li data-th-text="${xxx}" class="list-group-item"></li>
 </ul>
 
