@@ -23,6 +23,6 @@ values
 ("user01_profile", 1);
 
 select * from tbl_profile;
-
+drop TABLE world.tbl_dept;
 
  

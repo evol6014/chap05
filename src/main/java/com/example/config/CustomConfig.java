@@ -1,5 +1,7 @@
 package com.example.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -8,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 import com.example.domain.DeptVO;
 
 @Configuration
-public class CustomConfig {
+public class CustomConfig implements CommandLineRunner {
 
 	@Bean
 	InternalResourceViewResolver jspView() {
@@ -19,6 +21,27 @@ public class CustomConfig {
 		vr.setViewClass(JstlView.class);
 		
 		return vr;
+	}
+	
+	@Value("${spring.profiles.active}")
+	String profile;
+	@Value("${spring.datasource.driver-class-name}")
+	String cls;
+	@Value("${spring.datasource.url}")
+	String url;
+	@Value("${spring.datasource.username}")
+	String username;
+	
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("###");
+		System.out.println("### profile = " + profile);
+		System.out.println("### cls = " + cls);
+		System.out.println("### url = " + url);
+		System.out.println("### username = " + username);
+		System.out.println("###");
+		
+		
 	}
 	
 	@Bean
